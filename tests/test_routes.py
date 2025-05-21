@@ -161,3 +161,15 @@ class TestAccountService(TestCase):
             response.status_code,
             status.HTTP_204_NO_CONTENT
         )
+    
+    def test_lists_accounts(self):
+        """ Test to list all accounts """
+        NUMBER_OF_ACCOUNTS = 10
+        accounts = self._create_accounts(NUMBER_OF_ACCOUNTS)
+        response = self.client.get(BASE_URL)
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK,
+        )
+        data = response.get_json()
+        self.assertEqual(len(data), NUMBER_OF_ACCOUNTS)
