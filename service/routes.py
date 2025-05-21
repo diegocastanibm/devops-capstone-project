@@ -76,7 +76,15 @@ def read_account(account_id):
     This endpoint will read an Account based on an ID
     """
     app.logger.info("Request to Read an Account with id: %s", account_id)
-    account = Account()
+    account = Account.find(account_id)
+    if not account:
+        abort(
+            status.HTTP_404_NOT_FOUND,
+            f"Account with account ID {account_id} does not exist",
+        )
+    return account.serialize(), status.HTTP_200_OK
+        
+
 
 
 ######################################################################
