@@ -69,6 +69,14 @@ def create_accounts():
 ######################################################################
 
 # ... place you code here to READ an account ...
+@app.route("/accounts/<int:account_id>", methods=["GET"])
+def read_account(account_id):
+    """
+    Read an Account
+    This endpoint will read an Account based on an ID
+    """
+    app.logger.info("Request to Read an Account with id: %s", account_id)
+    account = Account()
 
 
 ######################################################################
