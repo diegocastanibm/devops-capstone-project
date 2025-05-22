@@ -128,7 +128,7 @@ class TestAccountService(TestCase):
         """ Test to read an account """
         account = self._create_accounts(1)[0]
         response = self.client.get(
-            f"{BASE_URL}/{account.id}", 
+            f"{BASE_URL}/{account.id}",
             content_type="application/json"
         )
         self.assertEqual(
@@ -142,7 +142,7 @@ class TestAccountService(TestCase):
     def test_account_not_found(self):
         """ Test to read an account that does not exist"""
         response = self.client.get(
-            f"{BASE_URL}/0", 
+            f"{BASE_URL}/0",
             content_type="application/json"
         )
         self.assertEqual(
@@ -154,18 +154,18 @@ class TestAccountService(TestCase):
         """ Test to delete an account """
         account = self._create_accounts(1)[0]
         response = self.client.delete(
-            f"{BASE_URL}/{account.id}", 
+            f"{BASE_URL}/{account.id}",
             content_type="application/json"
         )
         self.assertEqual(
             response.status_code,
             status.HTTP_204_NO_CONTENT
         )
-    
+
     def test_lists_accounts(self):
         """ Test to list all accounts """
         NUMBER_OF_ACCOUNTS = 10
-        accounts = self._create_accounts(NUMBER_OF_ACCOUNTS)
+        _ = self._create_accounts(NUMBER_OF_ACCOUNTS)
         response = self.client.get(BASE_URL)
         self.assertEqual(
             response.status_code,
@@ -196,7 +196,7 @@ class TestAccountService(TestCase):
         account = AccountFactory()
         response = self.client.post(f"{BASE_URL}/0", json=account.serialize())
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-    
+
     def test_method_not_allowed(self):
         """It should not allow an illegal method call"""
         resp = self.client.delete(BASE_URL)
